@@ -269,9 +269,13 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : RESET_Pin */
   GPIO_InitStruct.Pin = RESET_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP; // CORRECTION : Output Push Pull
   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(RESET_GPIO_Port, &GPIO_InitStruct);
+
+  // AJOUT CONSEILLÉ : Mettre le RESET à l'état HAUT par défaut pour démarrer
+  HAL_GPIO_WritePin(RESET_GPIO_Port, RESET_Pin, GPIO_PIN_SET);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
